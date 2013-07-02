@@ -214,23 +214,24 @@ static int __init calc_init(void)
         }
 
         for (i = 0; i < FILES_COUNT; i++) {
+		//dev, baseminor, count, name
                 if (alloc_chrdev_region(&numbers[i], 0, 1, names[i]) < 0) {
                         return -1;
                 }
-
+		//owner, class name
                 if ((classes[i] = class_create(THIS_MODULE, names[i])) == NULL) {
                         unregister_chrdev_region(numbers[i], 1);
                         return -1;
                 }
-
+		//class, parent, dev_t4czardevice, device name, variables) 
                 if (device_create(classes[i], NULL, numbers[i], NULL, names[i]) == NULL) {
                         class_destroy(classes[i]);
                         unregister_chrdev_region(numbers[i], 1);
                         return -1;
                 }
-
+		//to init, file operations.
                 cdev_init(&pDev[i], &fops);
-
+		//cdev4device, dev, count
                 if (cdev_add(&pDev[i], numbers[i], 1) == -1) {
                         device_destroy(classes[i], numbers[i]);
                         class_destroy(classes[i]);
