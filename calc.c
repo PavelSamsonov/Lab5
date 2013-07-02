@@ -10,7 +10,7 @@
 #include <asm/uaccess.h>
 #include "calc.h"
 
-/* Char devices files names. */
+/* Char devices file names. */
 #define FILENAME_FIRST "calc_first"
 #define FILENAME_SECOND "calc_second"
 #define FILENAME_ACTION "calc_action"
@@ -61,7 +61,7 @@ static FILE_OPERATIONS fops = {
 /* Devices numbers. */
 static dev_t numbers[FILES_COUNT];
 
-/* Global var for the character device struct */
+/* Global var for the character device structure */
 static PCDEV pDev;
 
 /* Global var for the device class */
